@@ -74,4 +74,42 @@ public class posLogin {
         pressEnter4.sendKeys(Keys.ENTER);
 
     }
+    @Test(priority = 4, description = "test case-05, Exchange an invoice")
+    public  void returnInvoice() throws InterruptedException
+    {
+        posSession.findElementByName("User ID").sendKeys("01313225159");
+        posSession.findElementByName("Password").sendKeys("123456");
+        posSession.findElementByName("Login").click();
+
+        Thread.sleep(2000);
+        posSession.findElementByName("Exchange /Return (F5)").click();
+        posSession.findElementByName("Search Invoice").sendKeys("12823061515163300001");
+        WebElement pressEnter5=posSession.findElementByName("Search Invoice");
+        pressEnter5.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        posSession.findElementByAccessibilityId("btnExchangeView").click();
+        Thread.sleep(2000);
+        posSession.findElementByAccessibilityId("PrimaryButton").click();
+        Thread.sleep(2000);
+        posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("1212");
+        WebElement pressEnter6 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
+        pressEnter6.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        WebElement pressF8 = posSession.findElementByName("1.0");
+        pressF8.sendKeys(Keys.F8);
+        pressF8.sendKeys("10");
+        WebElement pressEnter4=posSession.findElementByName("1.0");
+        pressEnter4.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        posSession.findElementByAccessibilityId("textBoxCashAmount").sendKeys("8");
+        WebElement pressEnter7 =posSession.findElementByAccessibilityId("textBoxCashAmount");
+        pressEnter7.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+
+//        posSession.findElementByName("Print").click();
+
+
+
+    }
+
 }
