@@ -1,9 +1,12 @@
 import io.appium.java_client.windows.WindowsDriver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import javax.swing.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
@@ -38,17 +41,25 @@ public class posLogin {
 //     {
 //         notepadSession.quit();
 //     }
-    @Test(priority = 0, description = "test case-01, open POS & login")
-    public  void loginPos()
+    @Test(priority = 0, description = "test case-01, open POS & login & create a customer ")
+    public  void loginPos() throws InterruptedException
     {
         posSession.findElementByName("User ID").sendKeys("01313225159");
         posSession.findElementByName("Password").sendKeys("123456");
         posSession.findElementByName("Login").click();
-
+        Thread.sleep(2000);
+        Actions actions = new Actions(posSession);
+        actions.keyDown(Keys.ALT).sendKeys("c").keyUp(Keys.ALT).perform();
+        Thread.sleep(2000);
+        posSession.findElementByName("Customer Name :").sendKeys("Ameena");
+        posSession.findElementByName("Mobile No :").sendKeys("01524152414");
+        posSession.findElementByAccessibilityId("PrimaryButton").click();
+        Thread.sleep(1000);
+        posSession.findElementByAccessibilityId("PrimaryButton").click();
 
     }
     @Test(priority = 1, description = "test case-02, add item by typing barcode")
-    public  void addItemPos()
+    public  void addItemPos() throws InterruptedException
     {
         posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("1212");
         WebElement pressEnter1 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
@@ -57,7 +68,7 @@ public class posLogin {
     }
 
     @Test(priority = 2, description = "test case-03, add customer")
-    public  void addCustomerPos()
+    public  void addCustomerPos() throws InterruptedException
     {
         posSession.findElementByName("Enter Customer No (Alt+M)....").sendKeys("999");
         WebElement pressEnter3 = posSession.findElementByName("Enter Customer No (Alt+M)....");
@@ -65,7 +76,7 @@ public class posLogin {
 
     }
     @Test(priority = 3, description = "test case-04, go to cash amount")
-    public  void addQuantity()
+    public  void addQuantity() throws InterruptedException
     {
         WebElement pressF8 = posSession.findElementByName("1.0");
         pressF8.sendKeys(Keys.F8);
@@ -105,6 +116,7 @@ public class posLogin {
         WebElement pressEnter7 =posSession.findElementByAccessibilityId("textBoxCashAmount");
         pressEnter7.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
+
 
 //        posSession.findElementByName("Print").click();
 
