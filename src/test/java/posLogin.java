@@ -41,22 +41,58 @@ public class posLogin {
 //     {
 //         notepadSession.quit();
 //     }
-    @Test(priority = 0, description = "test case-01, open POS & login & create a customer ")
+    @Test(priority = 0, description = "test case-01, open POS & login , create a customer & create a invoice with 4 items ")
     public  void loginPos() throws InterruptedException
     {
         posSession.findElementByName("User ID").sendKeys("01313225159");
         posSession.findElementByName("Password").sendKeys("123456");
         posSession.findElementByName("Login").click();
         Thread.sleep(2000);
+        //click alt+ c
         Actions actions = new Actions(posSession);
         actions.keyDown(Keys.ALT).sendKeys("c").keyUp(Keys.ALT).perform();
         Thread.sleep(2000);
-        posSession.findElementByName("Customer Name :").sendKeys("Ameena");
-        posSession.findElementByName("Mobile No :").sendKeys("01524152414");
+        //create new customer
+        posSession.findElementByName("Customer Name :").sendKeys("Meena");
+        posSession.findElementByName("Mobile No :").sendKeys("01524152415");
         posSession.findElementByAccessibilityId("PrimaryButton").click();
         Thread.sleep(1000);
         posSession.findElementByAccessibilityId("PrimaryButton").click();
-
+        Thread.sleep(1000);
+        //add items
+        posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("1212");
+        WebElement pressEnter1 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
+        pressEnter1.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("1010");
+        WebElement pressEnter2 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
+        pressEnter2.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("2020");
+        WebElement pressEnter3 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
+        pressEnter3.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        posSession.findElementByName("Scan or enter Barcode (Alt+B) ........").sendKeys("3030");
+        WebElement pressEnter4 = posSession.findElementByName("Scan or enter Barcode (Alt+B) ........");
+        pressEnter4.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        //press f8
+        WebElement pressF8 = posSession.findElementByName("1.0");
+        pressF8.sendKeys(Keys.F8);
+        pressF8.sendKeys("10");
+        WebElement pressEnter5=posSession.findElementByName("1.0");
+        pressEnter5.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        //click alt+ r
+        Actions actionsCash = new Actions(posSession);
+        actionsCash.keyDown(Keys.ALT).sendKeys("r").keyUp(Keys.ALT).perform();
+        Thread.sleep(2000);
+        WebElement pressEnter7 =posSession.findElementByAccessibilityId("textBoxCashAmount");
+        pressEnter7.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+        //print invoice
+        posSession.findElementByName("Print").click();
+        Thread.sleep(2000);
     }
     @Test(priority = 1, description = "test case-02, add item by typing barcode")
     public  void addItemPos() throws InterruptedException
@@ -86,7 +122,7 @@ public class posLogin {
 
     }
     @Test(priority = 4, description = "test case-05, Exchange an invoice")
-    public  void returnInvoice() throws InterruptedException
+    public  void exchangeInvoice() throws InterruptedException
     {
         posSession.findElementByName("User ID").sendKeys("01313225159");
         posSession.findElementByName("Password").sendKeys("123456");
@@ -112,15 +148,16 @@ public class posLogin {
         WebElement pressEnter4=posSession.findElementByName("1.0");
         pressEnter4.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
-        posSession.findElementByAccessibilityId("textBoxCashAmount").sendKeys("8");
+        Actions actionsCash = new Actions(posSession);
+        actionsCash.keyDown(Keys.ALT).sendKeys("r").keyUp(Keys.ALT).perform();
+        Thread.sleep(2000);
         WebElement pressEnter7 =posSession.findElementByAccessibilityId("textBoxCashAmount");
         pressEnter7.sendKeys(Keys.ENTER);
         Thread.sleep(2000);
-
-
-//        posSession.findElementByName("Print").click();
-
-
+        posSession.findElementByName("Print").click();
+        Thread.sleep(2000);
+//        posSession.findElementByAccessibilityId("PrimaryButton").click();
+        Thread.sleep(1000);
 
     }
 
