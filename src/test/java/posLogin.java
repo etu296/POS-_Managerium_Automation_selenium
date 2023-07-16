@@ -21,7 +21,7 @@ public class posLogin {
     public static  void setUp(){
         try{
             DesiredCapabilities capabilities = new  DesiredCapabilities();
-            capabilities.setCapability("app","C:\\Program Files\\WindowsApps\\CF9BD7D4-0F9A-4730-8950-05D032861D46_2.0.71.0_x64__4rafj02apad6w\\POS.exe");
+            capabilities.setCapability("app","C:\\Program Files\\WindowsApps\\CF9BD7D4-0F9A-4730-8950-05D032861D46_2.0.90.0_x64__4rafj02apad6w\\POS.exe");
             capabilities.setCapability("platformName","Windows");
             capabilities.setCapability("deviceName","WindowsPC");
             posSession = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
@@ -44,7 +44,7 @@ public class posLogin {
     @Test(priority = 0, description = "test case-01, open POS & login , create a customer & create a invoice with 4 items ")
     public  void loginPos() throws InterruptedException
     {
-        posSession.findElementByName("User ID").sendKeys("01313225159");
+        posSession.findElementByName("User ID").sendKeys("01313225150");
         posSession.findElementByName("Password").sendKeys("123456");
         posSession.findElementByName("Login").click();
         Thread.sleep(2000);
